@@ -37,13 +37,6 @@ The system uses pretrained YOLO models (COCO dataset) and supports custom class 
 
 ## ⚙️ Installation
 
-### 1️⃣ Clone the Repository
-
-```bash
-git clone https://github.com/your-username/yolo-streamlit-object-detection.git
-cd yolo-streamlit-object-detection
-```
-
 ### 2️⃣ Install Dependencies
 
 ```bash
