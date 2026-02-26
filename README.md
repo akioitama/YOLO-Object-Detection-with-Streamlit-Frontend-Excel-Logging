@@ -1,2 +1,193 @@
 # YOLO-Object-Detection-with-Streamlit-Frontend-Excel-Logging
-This project implements real-time object detection using a pretrained YOLO model with an interactive Streamlit frontend, support for custom classes, and automated logging of detected object counts into an Excel (.xlsx) file. It can detect objects from images, videos, and live webcam streams through a user-friendly web interface while saving per-class detection statistics for analysis and reporting.  The system uses transfer learning on pretrained YOLO weights (COCO dataset) and provides a complete end-to-end pipeline from inference to visualization and structured Excel export.  🚀 Features  Interactive Streamlit web interface  Real-time object detection (image, video, webcam)  Uses pretrained YOLO models (COCO 80 classes)  Custom object fine-tuning support  Bounding box visualization with labels  Automatic object count tracking per class  Export detected object counts to Excel (.xlsx)  File upload and live preview in browser  Downloadable Excel report from UI  Lightweight and scalable pipeline  🧱 Model Used  Pretrained YOLO (YOLOv8 / YOLOv5 compatible)  Trained on COCO dataset (80 object classes)  Supports transfer learning for new custom classes  📂 Project Structure ├── app.py              # Streamlit frontend application ├── data/               # Dataset (images & labels) ├── outputs/            # Detection results & Excel files ├── models/             # YOLO weights ├── detect.py           # Core detection + counting logic ├── train.py            # Custom training script ├── utils/              # Helper functions (counting, export) ├── requirements.txt    # Dependencies └── README.md ⚙️ Installation git clone https://github.com/your-username/yolo-streamlit-object-detection.git cd yolo-streamlit-object-detection pip install -r requirements.txt 🔧 Requirements  Python 3.8+  PyTorch  OpenCV  Ultralytics YOLO  Streamlit  Pandas  OpenPyXL (for Excel export)  Install dependencies manually:  pip install ultralytics opencv-python torch pandas openpyxl streamlit ▶️ Usage Run the Streamlit Web App (Recommended) streamlit run app.py  Then open the local URL shown in the terminal (usually: http://localhost:8501)  Alternative: Run Detection via Script python detect.py --source image.jpg python detect.py --source video.mp4 python detect.py --source 0 🖥️ Streamlit Frontend Capabilities  Upload images for object detection  Process video files  Live webcam detection  Display bounding boxes and confidence scores  Real-time object count display  One-click Excel report download  Clean and interactive dashboard UI  📊 Excel Output (Detection Count Logging)  After inference, the system automatically generates an Excel file containing:  Object Class Name  Total Count per Class  Timestamp  Source File Name  Example Excel Output:  | Class   | Count | |---------|-------| | person  | 5     | | car     | 2     | | dog     | 1     |  The Excel file is saved in:  outputs/detection_counts.xlsx  Users can also download the Excel file directly from the Streamlit interface.  🧪 Custom Dataset Training (New Classes)  You can fine-tune the pretrained YOLO model to detect new objects:  python train.py --data data.yaml --epochs 50 --weights yolov8n.pt  Recommended images per new class:  Minimum: 100 images  Ideal: 300–500 images (with augmentation)  🛠 How Detection Count Saving Works  YOLO model performs inference on image/video/webcam  Detected class labels are extracted from predictions  Object counts are accumulated in a dictionary  Results are converted into a Pandas DataFrame  Data is exported to .xlsx using OpenPyXL  File is stored and made downloadable via Streamlit UI  🌍 Use Cases  Smart surveillance systems  Retail analytics (people/object counting)  Industrial inspection  Robotics vision systems  Traffic monitoring  AI demo dashboards  Research & academic computer vision projects  📈 Future Improvements  Multi-object tracking (DeepSORT / ByteTrack)  Real-time analytics charts in Streamlit  Database logging (SQL / Firebase)  Edge deployment (ONNX / TensorRT)  Cloud deployment (Docker + AWS/GCP)  📜 License  This project is open-source and available under the MIT License.  🏷 Suggested GitHub Topics yolo streamlit object-detection computer-vision deep-learning pytorch yolov8 excel-export object-counting opencv machine-learning real-time-detection ai-dashboard
+# 🚀 YOLO Object Detection with Streamlit & Excel Export
+
+## 📌 Project Overview
+
+This project is a real-time Object Detection system built using YOLO (You Only Look Once) with a Streamlit web frontend.
+It allows users to upload images, videos, or use a webcam for detection while automatically counting detected objects and exporting the results to an Excel (.xlsx) file.
+
+The system uses pretrained YOLO models (COCO dataset) and supports custom class fine-tuning for domain-specific applications.
+
+---
+
+## 🧠 Key Features
+
+* 🎯 Real-time object detection (YOLOv8/YOLOv5)
+* 🖥️ Interactive Streamlit frontend UI
+* 📷 Image, Video, and Webcam support
+* 📊 Automatic object counting per class
+* 📁 Excel (.xlsx) export of detection results
+* 🧩 Support for custom trained classes
+* ⚡ Fast and lightweight inference pipeline
+* 📥 Downloadable Excel report from UI
+
+---
+
+## 🛠️ Tech Stack
+
+* Python
+* YOLO (Ultralytics)
+* Streamlit
+* OpenCV
+* PyTorch
+* Pandas
+* OpenPyXL
+
+---
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/yolo-streamlit-object-detection.git
+cd yolo-streamlit-object-detection
+```
+
+### 2️⃣ Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+Or manually:
+
+```bash
+pip install ultralytics opencv-python torch pandas openpyxl streamlit
+```
+
+---
+
+## ▶️ Running the Application
+
+### 🔹 Run Streamlit Frontend (Recommended)
+
+```bash
+streamlit run app.py
+```
+
+Then open the URL shown in terminal:
+
+```
+http://localhost:8501
+```
+
+---
+
+## 🖥️ Streamlit App Features
+
+* Upload image for detection
+* Upload video for processing
+* Live webcam detection
+* Real-time bounding box visualization
+* Dynamic object count display
+* One-click Excel report download
+
+---
+
+## 📊 Excel Output (Detection Count Logging)
+
+After detection, the system automatically generates an Excel file containing:
+
+* Object Class Name
+* Detection Count
+* Timestamp
+* Input Source
+
+### Example Output:
+
+| Class  | Count |
+| ------ | ----- |
+| person | 6     |
+| car    | 3     |
+| dog    | 1     |
+
+📁 Saved at:
+
+```
+outputs/detection_counts.xlsx
+```
+
+---
+
+## 🧪 Custom Dataset Training (Optional)
+
+To detect custom objects not in COCO classes:
+
+```bash
+python train.py --data data.yaml --epochs 50 --weights yolov8n.pt
+```
+
+### Recommended Dataset Size:
+
+* Minimum: 100 images per class
+* Optimal: 300–500 images per class (with augmentation)
+
+---
+
+## 🛠️ How It Works
+
+1. User uploads image/video or uses webcam via Streamlit UI
+2. YOLO model performs object detection
+3. Detected classes are counted in real-time
+4. Counts are stored in a dictionary
+5. Data is converted into a Pandas DataFrame
+6. Excel file (.xlsx) is generated using OpenPyXL
+7. User can download the Excel report directly from the UI
+
+---
+
+## 🌍 Use Cases
+
+* Smart Surveillance Systems
+* Retail Analytics (People Counting)
+* Traffic Monitoring
+* Industrial Inspection
+* Robotics Vision
+* AI Research Projects
+* Computer Vision Dashboards
+
+---
+
+## 📈 Future Enhancements
+
+* Object tracking (DeepSORT / ByteTrack)
+* Live analytics charts in Streamlit
+* Database logging (SQL/Firebase)
+* Docker deployment
+* Cloud deployment (AWS/GCP)
+* REST API integration
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🏷️ GitHub Topics (Recommended)
+
+```
+yolo
+streamlit
+object-detection
+computer-vision
+deep-learning
+yolov8
+opencv
+excel-export
+object-counting
+ai-dashboard
+machine-learning
+real-time-detection
+```
+
+---
+
+## ⭐ Acknowledgements
+
+* Ultralytics YOLO
+* Streamlit
+* OpenCV Community
+
