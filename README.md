@@ -1,5 +1,5 @@
 # YOLO-Object-Detection-with-Streamlit-Frontend-Excel-Logging
-# 🚀 YOLO Object Detection with Streamlit & Excel Export
+# 🚀 YOLO Object Detection with Streamlit & Excel Export.
 
 ## 📌 Project Overview
 
